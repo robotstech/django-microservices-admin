@@ -8,14 +8,12 @@ from django_microservices_admin import VERSION
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3, 6)
 
-# This check and everything above must remain compatible with Python 2.7.
-if CURRENT_PYTHON < REQUIRED_PYTHON:
-    sys.stderr.write('''
+UNSUPPORTED_VERSION_INFO = f'''
 ==========================
 Unsupported Python version
 ==========================
-This version of Django Microservices Admin requires Python {}.{}, but you're trying
-to install it on Python {}.{}.
+This version of Django Microservices Admin requires Python {REQUIRED_PYTHON}, but you're trying
+to install it on Python {CURRENT_PYTHON}.
 This may be because you are using a version of pip that doesn't
 understand the python_requires classifier. Make sure you
 have pip >= 9.0 and setuptools >= 24.2, then try again:
@@ -23,7 +21,11 @@ have pip >= 9.0 and setuptools >= 24.2, then try again:
     $ python -m pip install django-microservices-admin
 This will install the latest version of Django Microservices Admin which works on
 your version of Python.
-'''.format(*(REQUIRED_PYTHON + CURRENT_PYTHON)))
+'''
+
+# This check and everything above must remain compatible with Python 2.7.
+if CURRENT_PYTHON < REQUIRED_PYTHON:
+    sys.stderr.write(UNSUPPORTED_VERSION_INFO)
     sys.exit(1)
 
 
