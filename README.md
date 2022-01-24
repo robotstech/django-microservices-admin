@@ -5,38 +5,74 @@ This project make it possible to use Django's Admin Interface to administrate yo
 
 ## Quick Start Instructions
 ### Prerequisites
+
+1. Django Project for the microservices admin
+2. Microservices with individual databases
+
 ### Tools and Resources
 1. Python 3.8+ [link](https://www.python.org/downloads/release/python-387/)
 2. Virtualenv
 
 ### Installation
-Make sure to download/clone this repository and navigate to the folder in your terminal. Now follow the instructions 
-below
-
-1. Create the virtual environment.
-```shell script
-virtualenv /path/to/venv --python=/path/to/python3
+1. Install with pip <br />
+from pypi *(upcoming)*  
+``` shell
+pip install django-microservices-admin
 ```
-You can find out the path to your `python3` interpreter with the command `which python3`.
+from git  
+```
+pip install git+https://github.com/robotstech/django-microservices-admin.git
+```
+1. install database driver(s). <br /> 
+ - install for postgres driver: 
+ ``` shell 
+ pip install psycopg2-binary>=2.9.3
+ ```
+ - install for mysql driver: 
+ ``` shell 
+ pip install mysqlclient>=2.1.0
+ ```
 
-1. Set up `.env` file by duplicating the `.example.env` file(and editing if required).
+ - here are some supported drivers for django click [here](https://docs.djangoproject.com/en/4.0/ref/databases/
+ ) to see.
 
-1. Activate the environment and install dependencies.
-    - #### Linux
-    ```shell script
-    source /path/to/venv/bin/activate
-    pip install -r requirements.txt
-    ```
+| Database   |    Driver   |
+| --------   | --------  |
+| Postgres | [pycopg2](https://pypi.org/project/psycopg2/)|
+| Mysql  | [mysqlclient](https://pypi.org/project/mysqlclient/)|
 
-    - #### Windows
-    ```cmd
-    ./path/to/venv/bin/activate
-    pip install -r requirements.txt
-    ```
-1. Launch the app
-    ```shell script
-    python manage.py runserver
-   
+
+### Setup
+This is a setup for a simple microservice case, you can follow the same step with other microservices
+1. Go to project settings and scroll down to `DATABASES`. It usually look like this for new projects
+``` python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+1. import dj_database_url 
+``` python
+import dj_database_url
+```
+1. Add a microservice database as follows:
+``` python
+
+DATABASES = {
+    ...
+    '{MICROSERVICE_NAME}': dj_database_url.parse('{MICROSERVICE_DATABASE_URL}')
+}
+```
+1. Create an app to represent the microservice
+``` shell 
+python manage.py startapp MICROSERVICE_NAME
+```
+1. Run the inspectdb command
+``` shell 
+python manage.py inspectdb >
+```
 
 ## Usage/In-depth API Documentation.
 See [DOCUMENTATION.md](DOCUMENTATION.md)
