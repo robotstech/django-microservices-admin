@@ -45,7 +45,8 @@ setup(
         'dj-database-url>=0.5.0',
     ],
     extras_require={
-        'postgres': ['psycopg2-binary>=2.9.3']
+        'postgres': ['psycopg2-binary>=2.9.3'],
+        'mysql': ['mysqlclient>=2.1.0'],
     },
     # See http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
