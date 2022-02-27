@@ -14,16 +14,15 @@ This project make it possible to use Django's Admin Interface to administrate yo
 2. Virtualenv
 
 ### Installation
-1. Install with pip <br />
-from pypi *(upcoming)*  
-``` shell
-pip install django-microservices-admin
-```
-from git  
-```
-pip install git+https://github.com/robotstech/django-microservices-admin.git
-```
-1. install database driver(s). <br /> 
+1. Install with pip <br /> from pypi *(upcoming)*  
+ ``` shell
+ pip install django-microservices-admin
+ ```
+ from git  
+ ```
+ pip install git+https://github.com/robotstech/django-microservices-admin.git
+ ```
+2. install database driver(s). <br /> 
  - install for postgres driver: 
  ``` shell 
  pip install psycopg2-binary>=2.9.3
