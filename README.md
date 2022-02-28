@@ -44,19 +44,32 @@ This project make it possible to use Django's Admin Interface to administrate yo
 ### Setup
 This is a setup for a simple microservice case, you can follow the same step with other microservices
 1. Add a microservice database as follows:
-   ``` python
+   ```python
    
    MICROSERVICES_ADMIN = {
        '{MICROSERVICE_NAME}': {
-            DATABASE_URL: '{MICROSERVICE_DATABASE_URL}',
-            DATABASE_TABLES": ['list', 'of', 'table', 'names']
+            'DATABASE_URL': '{MICROSERVICE_DATABASE_URL}',
+            'DATABASE_TABLES': ['list', 'of', 'table', 'names']
        },
    }
    ```
-1. Create an app to represent the microservice
+2. Create an app to represent the microservice
    ``` shell 
    py manage.py update_microservices_admin
    ```
+3. Include microservice in installed apps
+    ```python
+   
+    INSTALLED_APPS = [
+        ...,
+        '{MICROSERVICE_NAME}',
+    ]
+    ```
+4. Create Super User.
+    ```shell
+    python manage.py createsuperuser --username admin
+    ```
+5. Visit [admin](http://127.0.0.1:8000/admin/)
 
 ## Usage/In-depth API Documentation.
 See [DOCUMENTATION.md](DOCUMENTATION.md)

@@ -18,3 +18,4 @@ class SettingAttribute(Enum):
 for microservice_name, microservice_attrs in MICROSERVICES_ADMIN_SETTINGS.items():
     DATABASES[microservice_name] = dj_database_url.parse(microservice_attrs[SettingAttribute.DATABASE_URL.value])
 
+# DATABASE_ROUTERS = ['django_microservices_admin.routers.AuthRouter']
