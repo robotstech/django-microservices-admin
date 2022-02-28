@@ -1,3 +1,8 @@
+from django.conf import settings
+
+DATABASES = getattr(settings, "DATABASES")
+
+
 class AuthRouter:
     """
     A router to control all database operations on models in the
@@ -9,14 +14,20 @@ class AuthRouter:
         """
         Attempts to read auth and contenttypes models go to auth_db.
         """
-        return getattr(model, '_meta').app_label
+        app_label = getattr(model, '_meta').app_label
+        if app_label in DATABASES:
+            return app_label
+        return 'default'
 
     @staticmethod
     def db_for_write(model, **hints):
         """
         Attempts to write auth and contenttypes models go to auth_db.
         """
-        return getattr(model, '_meta').app_label
+        app_label = getattr(model, '_meta').app_label
+        if app_label in DATABASES:
+            return app_label
+        return 'default'
 
     @staticmethod
     def allow_relation(obj1, obj2, **hints):
@@ -24,7 +35,10 @@ class AuthRouter:
         Allow relations if a model in the auth or contenttypes apps is
         involved.
         """
-        return None
+        app_label = getattr(obj1, '_meta').app_label
+        if app_label in DATABASES:
+            return None
+        return 'default'
 
     @staticmethod
     def allow_migrate(db, app_label, model_name=None, **hints):
@@ -32,4 +46,6 @@ class AuthRouter:
         Make sure the auth and contenttypes apps only appear in the
         'auth_db' database.
         """
-        return None
+        if app_label in DATABASES:
+            return None
+        return 'default'

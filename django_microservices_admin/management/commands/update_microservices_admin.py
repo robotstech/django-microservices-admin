@@ -8,7 +8,7 @@ from django.core.management import BaseCommand, call_command
 from django_microservices_admin.settings import SettingAttribute
 
 BASE_DIR = getattr(settings, "BASE_DIR")
-MICROSERVICES_ADMIN_SETTINGS = getattr(settings, "MICROSERVICES_ADMIN")
+MICROSERVICES_ADMIN_SETTINGS = getattr(settings, "MICROSERVICES_ADMIN_SETTINGS")
 
 
 class Command(BaseCommand):

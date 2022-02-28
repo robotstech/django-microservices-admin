@@ -1,13 +1,8 @@
 from enum import Enum
 
 import dj_database_url
-from django.conf import settings
 
-DATABASES = getattr(settings, "DATABASES", None)
-MICROSERVICES_ADMIN_SETTINGS = getattr(settings, "MICROSERVICES_ADMIN", None)
-
-if not MICROSERVICES_ADMIN_SETTINGS:
-    raise AttributeError("MICROSERVICES_ADMIN must be declared in settings")
+MICROSERVICES_ADMIN_SETTINGS = None
 
 
 class SettingAttribute(Enum):
@@ -15,7 +10,14 @@ class SettingAttribute(Enum):
     DATABASE_TABLES = "DATABASE_TABLES"
 
 
-for microservice_name, microservice_attrs in MICROSERVICES_ADMIN_SETTINGS.items():
-    DATABASES[microservice_name] = dj_database_url.parse(microservice_attrs[SettingAttribute.DATABASE_URL.value])
+def update(user_settings: dict, microservices_admin_settings: dict):
+    global MICROSERVICES_ADMIN_SETTINGS
+    MICROSERVICES_ADMIN_SETTINGS = microservices_admin_settings
 
-# DATABASE_ROUTERS = ['django_microservices_admin.routers.AuthRouter']
+    for microservice_name, microservice_attrs in microservices_admin_settings.items():
+        user_settings['DATABASES'][microservice_name] = dj_database_url.parse(
+            microservice_attrs[SettingAttribute.DATABASE_URL.value]
+        )
+
+
+DATABASE_ROUTERS = ['django_microservices_admin.routers.AuthRouter']
