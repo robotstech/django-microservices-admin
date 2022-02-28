@@ -5,16 +5,15 @@ import shutil
 from django.conf import settings
 from django.core.management import BaseCommand, call_command
 
-from django_microservices_admin.settings import SettingAttribute
+from django_microservices_admin.settings import SettingAttribute, MICROSERVICES_ADMIN_SETTINGS
 
 BASE_DIR = getattr(settings, "BASE_DIR")
-MICROSERVICES_ADMIN_SETTINGS = getattr(settings, "MICROSERVICES_ADMIN_SETTINGS")
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         initial_stdout = sys.stdout
-        for microservice_name, microservice_attrs in MICROSERVICES_ADMIN_SETTINGS.items():
+        for microservice_name, microservice_attrs in    MICROSERVICES_ADMIN_SETTINGS.items():
             tables = microservice_attrs[SettingAttribute.DATABASE_TABLES.value]
 
             if not os.path.exists(os.path.join(BASE_DIR, microservice_name)):

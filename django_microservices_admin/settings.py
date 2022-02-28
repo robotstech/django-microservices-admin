@@ -19,5 +19,4 @@ def update(user_settings: dict, microservices_admin_settings: dict):
             microservice_attrs[SettingAttribute.DATABASE_URL.value]
         )
 
-
-DATABASE_ROUTERS = ['django_microservices_admin.routers.AuthRouter']
+    user_settings['DATABASE_ROUTERS'] = ['django_microservices_admin.routers.AuthRouter']
