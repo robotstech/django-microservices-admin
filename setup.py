@@ -28,6 +28,8 @@ if CURRENT_PYTHON < REQUIRED_PYTHON:
     sys.stderr.write(UNSUPPORTED_VERSION_INFO)
     sys.exit(1)
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 setup(
     name='django-microservices-admin',
@@ -35,7 +37,8 @@ setup(
     url='https://github.com/robotstech/django-microservices-admin',
     description=(
         "Utilizing Django Admin to manage microservices data"),
-    long_description=open('README.md').read(),
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     keywords="Django, django-admin, microservices",
     license='MIT',
     packages=find_packages(exclude=['tests*']),

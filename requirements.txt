@@ -9,7 +9,5 @@ pytest==6.2.5
 pytest-django==4.5.2
 pytest-cov==3.0.0
 
-# Optional 
-# TODO: to be refactored
-gunicorn==20.1.0
+# Optional
 psycopg2-binary==2.9.3
