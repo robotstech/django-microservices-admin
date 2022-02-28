@@ -43,35 +43,20 @@ This project make it possible to use Django's Admin Interface to administrate yo
 
 ### Setup
 This is a setup for a simple microservice case, you can follow the same step with other microservices
-1. Go to project settings and scroll down to `DATABASES`. It usually look like this for new projects
-``` python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-```
-1. import dj_database_url 
-``` python
-import dj_database_url
-```
 1. Add a microservice database as follows:
-``` python
-
-DATABASES = {
-    ...
-    '{MICROSERVICE_NAME}': dj_database_url.parse('{MICROSERVICE_DATABASE_URL}')
-}
-```
+   ``` python
+   
+   MICROSERVICES_ADMIN = {
+       '{MICROSERVICE_NAME}': {
+            DATABASE_URL: '{MICROSERVICE_DATABASE_URL}',
+            DATABASE_TABLES": ['list', 'of', 'table', 'names']
+       },
+   }
+   ```
 1. Create an app to represent the microservice
-``` shell 
-python manage.py startapp MICROSERVICE_NAME
-```
-1. Run the inspectdb command
-``` shell 
-python manage.py inspectdb >
-```
+   ``` shell 
+   py manage.py update_microservices_admin
+   ```
 
 ## Usage/In-depth API Documentation.
 See [DOCUMENTATION.md](DOCUMENTATION.md)

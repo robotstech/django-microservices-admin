@@ -13,8 +13,8 @@ MICROSERVICES_ADMIN_SETTINGS = getattr(settings, "MICROSERVICES_ADMIN")
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        for microservice_name, microservice_attrs in MICROSERVICES_ADMIN_SETTINGS:
-            tables = microservice_attrs[SettingAttribute.DATABASE_TABLES]
+        for microservice_name, microservice_attrs in MICROSERVICES_ADMIN_SETTINGS.items():
+            tables = microservice_attrs[SettingAttribute.DATABASE_TABLES.value]
 
             if not os.path.exists(os.path.join(BASE_DIR, microservice_name)):
                 startapp.Command().handle(name=microservice_name)
