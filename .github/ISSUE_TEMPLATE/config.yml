@@ -1,1 +1,6 @@
 blank_issues_enabled: false
+
+contact_links:
+  - name: Authors
+    url: https://github.com/robotstech/django-microservices-admin/blob/main/README.md#Authors/Contributors
+    about: checkout the README for list of contributors
