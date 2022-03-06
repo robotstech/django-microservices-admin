@@ -1,5 +1,5 @@
 # django-microservices-admin
-![main workflow](https://github.com/robotech/django-microservices-admin/actions/workflows/main.yml/badge.svg) <br>
+![main workflow](https://github.com/robotstech/django-microservices-admin/actions/workflows/main.yml/badge.svg) <br>
 This project make it possible to use Django's Admin Interface to administrate your microservices. Sample project [here](https://github.com/robotstech/django-microservices/tree/main/message_boards_admin)
 
 
